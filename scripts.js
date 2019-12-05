@@ -5,7 +5,6 @@ container.setAttribute('class', 'container');
 
 app.appendChild(container);
 
-
 var request = new XMLHttpRequest();
 request.open('GET', 'http://api.nbp.pl/api/exchangerates/tables/c/?format=json', true);
 request.onload = function () {
@@ -30,8 +29,7 @@ request.onload = function () {
                 container.appendChild(col1);
                 container.appendChild(col2);
                 container.appendChild(col3);
-//                const card = document.createElement('div');
-//                card.setAttribute('class', 'card');
+
 
                 const k = document.createElement('k');
                 k.textContent = rate.code;
