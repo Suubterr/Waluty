@@ -32,12 +32,15 @@ request.onload = function () {
 
 
                 const k = document.createElement('k');
+                k.classList.add('liczba');
                 k.textContent = rate.code;
 
                 const a = document.createElement('a');
+                a.classList.add('liczba');
                 a.textContent = rate.bid;
 
                 const p = document.createElement('p');
+                p.classList.add('liczba');
                 p.textContent = rate.ask;
                 
                 var img = document.createElement('img');

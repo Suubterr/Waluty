@@ -23,7 +23,6 @@ img {
     display: grid;
     float: left;
     width: 28%;
-    border: 5px solid black;
     height: 125px;
     justify-content: center;
     align-content: center;
@@ -34,11 +33,16 @@ img {
     float: left;
     width: 16%;
     height: auto;
-    border: 5px solid black;
     overflow: hidden;
     height: 125px;
     justify-content: center;
     align-content: center;
+    
+}
+
+.liczba {
+    font-size: 50px;
+    font-weight: 600;
 }
 
 
