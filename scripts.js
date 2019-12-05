@@ -8,7 +8,6 @@ app.appendChild(container);
 var request = new XMLHttpRequest();
 request.open('GET', 'http://api.nbp.pl/api/exchangerates/tables/c/?format=json', true);
 request.onload = function () {
-    console.log(this.response)
 
   // Begin accessing JSON data here
   var data = JSON.parse(this.response);
@@ -16,6 +15,7 @@ request.onload = function () {
       
         data.forEach(movie => {
             movie.rates.forEach(rate =>{
+                
                 const col0 = document.createElement('div');
                 col0.setAttribute('class', 'col0');
                 const col1 = document.createElement('div');
@@ -34,18 +34,19 @@ request.onload = function () {
                 const k = document.createElement('k');
                 k.textContent = rate.code;
 
-                const q = document.createElement('q');
-                q.textContent = rate.bid;
+                const a = document.createElement('a');
+                a.textContent = rate.bid;
 
                 const p = document.createElement('p');
                 p.textContent = rate.ask;
                 
-                var lol = document.createElement('lol');
-                lol.textContent = 'lol';
+                var img = document.createElement('img');
+                img.src = "flagi/" + rate.code + ".png";
+                
 
-                col0.appendChild(lol);
+                col0.appendChild(img);
                 col1.appendChild(k);
-                col2.appendChild(q);
+                col2.appendChild(a);
                 col3.appendChild(p);
             
         })
