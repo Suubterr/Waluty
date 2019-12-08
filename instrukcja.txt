@@ -1,0 +1,4 @@
+1. Odpalamy admin.html
+2. Uzupełniamy rubryki dla każdej z walut ospowiednimi kwotami i klikamy załaduj dane.
+3. Odpalamy w nowej karcie index.html i powinniśmy widzieć wprowadzone informacje.
+4. Aby zmienić kwoty powtarzamy czynności z punktu 2. a zmiany same się zaktualizują w ciągu max 5 sekund.

@@ -17,6 +17,8 @@ html {
 
 img {
     display: flex;
+    height: 80px;
+    width: 160px;
 }
 
 .col {
@@ -41,6 +43,11 @@ img {
 }
 
 .liczba {
+    font-size: 75px;
+    font-weight: 600;
+}
+
+.kod {
     font-size: 50px;
     font-weight: 600;
 }

@@ -3,67 +3,39 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <script>
-        
-        const kodWaluty = [
-            'usd'
-            ,'eur'
-            ,'gbp'
-            ,'chf'
-            ,'cad'
-            ,'sek'
-            ,'dkk'
-            ,'nok'
-            ,'sur'
-            ,'huf'
-            ,'czk'
-            ,'uah'
-        ];
-        
-        
-        // funkcja jako argument przyjmuje HTMLCollection i zapisuje wartosci do plików cookies w formacie 
-        // [nazwa obiektu]:[rodz. transakcji]=[kwota] np. usd:skup=23,50
-        function zapiszDaneFormularza() {
-            kodWaluty.forEach (kod => {
-                var waluta = document.getElementsByClassName(kod);
-                if(waluta[0].name == "skup") {
-                    var skup = waluta[0].value;
-                    var sprzedaz = waluta[1].value;
-                } else {
-                    var skup = waluta[1].value;
-                    var sprzedaz = waluta[0].value;
-                }
-                
-                console.log("Utworzono ciasteczko: " + waluta[0].className + "=" + skup + ":" + sprzedaz + "; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT");
-                
-                document.cookie = waluta[0].className + "=" + skup + ":" + sprzedaz + "; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
-            })
-            
-        }
-        
-    </script>
     
+    <link href="css/admin.css" rel="stylesheet">
     
 </head>
 
 <body>
+    
+    <h1>Wprowadź kursy walut:</h1>
+    
+    <div id="mainDiv">
 
-    USD     <input type="text" name="skup" class="usd"> <input type="text" class="usd" name="sprzedaz"><br>
-    EUR     <input type="text" name="skup" class="eur"> <input type="text" class="eur" name="sprzedaz"><br>
-    GBP     <input type="text" name="skup" class="gbp"> <input type="text" class="gbp" name="sprzedaz"><br>
-    CHF     <input type="text" name="skup" class="chf"> <input type="text" class="chf" name="sprzedaz"><br>
-    CAD     <input type="text" name="skup" class="cad"> <input type="text" class="cad" name="sprzedaz"><br>
-    SEK     <input type="text" name="skup" class="sek"> <input type="text" class="sek" name="sprzedaz"><br>
-    DKK     <input type="text" name="skup" class="dkk"> <input type="text" class="dkk" name="sprzedaz"><br>
-    NOK     <input type="text" name="skup" class="nok"> <input type="text" class="nok" name="sprzedaz"><br>
-    SUR     <input type="text" name="skup" class="sur"> <input type="text" class="sur" name="sprzedaz"><br>
-    HUF     <input type="text" name="skup" class="huf"> <input type="text" class="huf" name="sprzedaz"><br>
-    CZK     <input type="text" name="skup" class="czk"> <input type="text" class="czk" name="sprzedaz"><br>
-    UAH     <input type="text" name="skup" class="uah"> <input type="text" class="uah" name="sprzedaz"><br>
+<!--
+    USD     <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" name="skup" class="usd"> <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" class="usd" name="sprzedaz"><br>
+    EUR     <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" name="skup" class="eur"> <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" class="eur" name="sprzedaz"><br>
+    GBP     <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" name="skup" class="gbp"> <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" class="gbp" name="sprzedaz"><br>
+    CHF     <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" name="skup" class="chf"> <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" class="chf" name="sprzedaz"><br>
+    CAD     <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" name="skup" class="cad"> <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" class="cad" name="sprzedaz"><br>
+    SEK     <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" name="skup" class="sek"> <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" class="sek" name="sprzedaz"><br>
+    DKK     <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" name="skup" class="dkk"> <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" class="dkk" name="sprzedaz"><br>
+    NOK     <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" name="skup" class="nok"> <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" class="nok" name="sprzedaz"><br>
+    SUR     <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" name="skup" class="sur"> <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" class="sur" name="sprzedaz"><br>
+    HUF     <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" name="skup" class="huf"> <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" class="huf" name="sprzedaz"><br>
+    CZK     <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" name="skup" class="czk"> <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" class="czk" name="sprzedaz"><br>
+    UAH     <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" name="skup" class="uah"> <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" class="uah" name="sprzedaz"><br>
+-->
+    </div>
     <br>
     <button id="button" onclick="zapiszDaneFormularza()">Załaduj Dane</button>
+    <br>
     
+    <script src="admin.js"></script>
+    
+
 </body>
     
 </html>

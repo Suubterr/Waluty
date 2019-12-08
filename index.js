@@ -9,9 +9,9 @@ const waluty = document.cookie.split(";");
 
 window.onload = function() {
 
-  console.log(waluty)
-  if (waluty) {
-      
+  console.log(waluty.length);
+  if (waluty.length > 1) {
+    
     waluty.forEach(waluta => {            
                 
         const col0 = document.createElement('div');
@@ -30,10 +30,9 @@ window.onload = function() {
         
         var h = waluta.split("=")[0].toUpperCase();
         var sciezka = "flagi/" + h.trim() + ".png";
-        console.log(sciezka);
 
         const kod = document.createElement('k');
-        kod.classList.add('liczba');
+        kod.classList.add('kod');
         kod.textContent = h;
 
         const skup = document.createElement('a');
@@ -46,7 +45,6 @@ window.onload = function() {
         
         var img = document.createElement('img');
         img.src = sciezka;
-        
         
 
         col0.appendChild(img);
