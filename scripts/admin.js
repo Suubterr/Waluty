@@ -13,6 +13,8 @@ const kodyDostepnychWalut = [
             ,'uah'
 ];
 
+const maxIloscZnakow = 7;
+
 const mainDiv = document.getElementById("mainDiv");
 
 var skupW = "";
@@ -23,11 +25,11 @@ function zapiszDaneFormularza() {
     kodyDostepnychWalut.forEach (kod => {
         var waluta = document.getElementsByClassName(kod);
         if(waluta[0].name == "skup") {
-            var skup = waluta[0].value;
-            var sprzedaz = waluta[1].value;
+            var skup = waluta[0].value.substr(0, maxIloscZnakow);
+            var sprzedaz = waluta[1].value.substr(0, maxIloscZnakow);
         } else {
-            var skup = waluta[1].value;
-            var sprzedaz = waluta[0].value;
+            var skup = waluta[1].value.substr(0, maxIloscZnakow);
+            var sprzedaz = waluta[0].value.substr(0, maxIloscZnakow);
         }
         
         console.log("Utworzono ciasteczko: " + waluta[0].className + "=" + skup + ":" + sprzedaz + "; path=\; expires=Fri, 31 Dec 9999 23:59:59 GMT");
@@ -35,10 +37,7 @@ function zapiszDaneFormularza() {
         document.cookie = waluta[0].className + "=" + skup + ":" + sprzedaz + "; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
     })
     alert("Kursy zostały załadowane.")
-    
 }
-
-
 
 window.onload = function() {
     kodyDostepnychWalut.forEach(kod => {
@@ -52,12 +51,10 @@ window.onload = function() {
                     skupW = wc.split("=")[1].split(":")[0];
                     sprzedW = wc.split("=")[1].split(":")[1];
                     console.log(kod + " > " + skupW + ":" + sprzedW);
-                    
                 }
             })
         }
         
-//        UAH     <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" name="skup" class="uah"> <input type="number" maxlength="7" pattern="^(\d+\,)?\d+$" class="uah" name="sprzedaz">
         const kontKurs = document.createElement("div");
         kontKurs.calssName = "kontKurs";
         
@@ -74,7 +71,6 @@ window.onload = function() {
         
         inSkup.type="number";
         inSkup.step="0.0001";
-        inSkup.maxlength="7";
         inSkup.value=skupW;
         inSkup.className=kod;
         inSkup.name="skup";
@@ -82,7 +78,6 @@ window.onload = function() {
         
         inSprzedaz.type="number";
         inSprzedaz.step="0.0001";
-        inSprzedaz.maxlength="7";
         inSprzedaz.value=sprzedW;
         inSprzedaz.className=kod;
         inSprzedaz.name="sprzedaz";
