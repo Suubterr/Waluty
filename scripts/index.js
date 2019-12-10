@@ -20,12 +20,10 @@ container.setAttribute('class', 'container');
 
 app.appendChild(container);
 
+const nazwaCiastkaZczasemOA = "czasOstAkt";
 const waluty = document.cookie.split(";");
 
 window.onload = function() {
-
-  console.log(waluty.length);
-  console.log(kodyDostepnychWalut.length);
     
   if (waluty.length > 1) {
     
@@ -34,6 +32,13 @@ window.onload = function() {
         waluty.forEach(waluta => {
             
             var h = waluta.split("=")[0];
+
+      
+                if(waluta.split("=")[0].trim() == nazwaCiastkaZczasemOA){
+                    console.log(waluta);
+                    var coa = waluta.split("=")[1];
+                    document.getElementById("czasOstAkt").textContent = "Ostania aktualizacja: " + coa;
+                }
             
             if(kodWal.trim() == h.trim()) {
 
@@ -78,6 +83,9 @@ window.onload = function() {
             }
         });
     });
+      
+
+      
   } else {
         const errorMessage = document.createElement('marquee');
         errorMessage.textContent = `Brak wygenerowanych ciasteczek.`;

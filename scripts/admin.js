@@ -36,8 +36,28 @@ function zapiszDaneFormularza() {
         
         document.cookie = waluta[0].className + "=" + skup + ":" + sprzedaz + "; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
     })
-    alert("Kursy zostały załadowane.")
+    
+    var obecnyCzas = new Date();
+    
+    var dzien = obecnyCzas.getDay();
+    var miesiac = obecnyCzas.getMonth();
+    var rok = obecnyCzas.getFullYear();
+    
+    var godzina = obecnyCzas.getHours();
+    var minuta = obecnyCzas.getMinutes();
+    var sekunda = obecnyCzas.getSeconds();
+    
+    var czasExportu = dzien + "-" + miesiac + "-" + rok + " " + godzina + ":" + minuta + ":" + sekunda
+    
+    document.cookie = "czasOstAkt=" + czasExportu + "; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    console.log("Utworzono ciasteczko: " + "czasOstAkt=" + czasExportu + "; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT");
+    
+    var poleZczasemAkt = document.getElementById("czasAktualizacji");
+    poleZczasemAkt.textContent = "Ostatnia aktualizacja: " + czasExportu;
+    
+    alert("Kursy zostały załadowane (" + czasExportu + ")");
 }
+
 
 window.onload = function() {
     kodyDostepnychWalut.forEach(kod => {

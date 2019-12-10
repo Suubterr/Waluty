@@ -52,6 +52,25 @@ img {
     align-content: center;
 }
 
+.colh {
+    float: right;
+    width: 37%;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    height: 60px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.fill {
+    float: left;
+    width: 26%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    height: 60px;
+}
+
 .liczba {
     font-size: 75px;
     font-weight: 600;
@@ -61,6 +80,16 @@ img {
     font-size: 50px;
     font-weight: 600;
 }
+
+#czasOstAkt {
+    text-align: right;
+}
+
+/*
+.nagl {
+    font-size: 30px;
+}
+*/
 
 
 /*

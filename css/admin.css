@@ -31,6 +31,7 @@ p{
     padding: 10;
     float: left;
     max-width: 30px;
+    margin-right: 10px;
 }
 #wpisz{
     font-family: tahoma;
@@ -45,4 +46,8 @@ p{
 #kontKurs {
     display: flex;
     align-items: right;
+}
+
+i {
+    font-size: small;
 }
