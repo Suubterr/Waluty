@@ -22,6 +22,20 @@ var sprzedW = "";
 
 // funkcja jako argument przyjmuje HTMLCollection i zapisuje wartosci do plików cookies
 function zapiszDaneFormularza() {
+    
+    var obecnyCzas = new Date();
+    
+    var dzien = obecnyCzas.getDate();
+    var miesiac = obecnyCzas.getMonth() + 1;
+    var rok = obecnyCzas.getFullYear();
+    var rokDoCiastka = rok + 1;
+    
+    var godzina = obecnyCzas.getHours();
+    var minuta = obecnyCzas.getMinutes();
+    var sekunda = obecnyCzas.getSeconds();
+    
+    var czasExportu = dzien + "-" + miesiac + "-" + rok + " " + godzina + ":" + minuta + ":" + sekunda
+    
     kodyDostepnychWalut.forEach (kod => {
         var waluta = document.getElementsByClassName(kod);
         if(waluta[0].name == "skup") {
@@ -32,22 +46,10 @@ function zapiszDaneFormularza() {
             var sprzedaz = waluta[0].value.substr(0, maxIloscZnakow);
         }
         
-        console.log("Utworzono ciasteczko: " + waluta[0].className + "=" + skup + ":" + sprzedaz + "; path=\; expires=Fri, 31 Dec 9999 23:59:59 GMT");
+        console.log("Utworzono ciasteczko: " + waluta[0].className + "=" + skup + ":" + sprzedaz + "; path=\; expires=Fri, 31 Dec " + rokDoCiastka + " 23:59:59 GMT");
         
-        document.cookie = waluta[0].className + "=" + skup + ":" + sprzedaz + "; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+        document.cookie = waluta[0].className + "=" + skup + ":" + sprzedaz + "; path=/; expires=Fri, 31 Dec " + rokDoCiastka + " 23:59:59 GMT";
     })
-    
-    var obecnyCzas = new Date();
-    
-    var dzien = obecnyCzas.getDay();
-    var miesiac = obecnyCzas.getMonth();
-    var rok = obecnyCzas.getFullYear();
-    
-    var godzina = obecnyCzas.getHours();
-    var minuta = obecnyCzas.getMinutes();
-    var sekunda = obecnyCzas.getSeconds();
-    
-    var czasExportu = dzien + "-" + miesiac + "-" + rok + " " + godzina + ":" + minuta + ":" + sekunda
     
     document.cookie = "czasOstAkt=" + czasExportu + "; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
     console.log("Utworzono ciasteczko: " + "czasOstAkt=" + czasExportu + "; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT");
