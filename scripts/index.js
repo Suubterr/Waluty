@@ -23,6 +23,8 @@ app.appendChild(container);
 const nazwaCiastkaZczasemOA = "czasOstAkt";
 const waluty = document.cookie.split(";");
 
+var coa = '';
+
 window.onload = function() {
     
   if (waluty.length > 1) {
@@ -35,9 +37,7 @@ window.onload = function() {
 
       
                 if(waluta.split("=")[0].trim() == nazwaCiastkaZczasemOA){
-                    console.log(waluta);
-                    var coa = waluta.split("=")[1];
-                    document.getElementById("czasOstAkt").textContent = "Ostania aktualizacja: " + coa;
+                    coa = waluta.split("=")[1];
                 }
             
             if(kodWal.trim() == h.trim()) {
@@ -83,7 +83,13 @@ window.onload = function() {
             }
         });
     });
-      
+
+      if(coa){
+        const czasAkt = document.createElement('div');
+        czasAkt.setAttribute('id','czasOstAkt');
+        czasAkt.textContent = "Ostania aktualizacja: " + coa;
+        container.appendChild(czasAkt);
+      }
 
       
   } else {

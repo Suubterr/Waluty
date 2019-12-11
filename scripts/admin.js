@@ -20,9 +20,11 @@ const mainDiv = document.getElementById("mainDiv");
 var skupW = "";
 var sprzedW = "";
 
-// funkcja jako argument przyjmuje HTMLCollection i zapisuje wartosci do plików cookies
+// funkcja generująca ciasteczka
 function zapiszDaneFormularza() {
     
+    
+    // generowanie timestampa dla zestawu danych
     var obecnyCzas = new Date();
     
     var dzien = obecnyCzas.getDate();
@@ -31,11 +33,14 @@ function zapiszDaneFormularza() {
     var rokDoCiastka = rok + 1;
     
     var godzina = obecnyCzas.getHours();
+    if(godzina<10) godzina = "0" + godzina;
     var minuta = obecnyCzas.getMinutes();
-    var sekunda = obecnyCzas.getSeconds();
+    if(minuta<10) minuta = "0" + minuta;
     
-    var czasExportu = dzien + "-" + miesiac + "-" + rok + " " + godzina + ":" + minuta + ":" + sekunda
+    var czasExportu = dzien + "-" + miesiac + "-" + rok + " " + godzina + ":" + minuta;
     
+    
+    //generowanie zestawu danych w oparciu o tablicę walut
     kodyDostepnychWalut.forEach (kod => {
         var waluta = document.getElementsByClassName(kod);
         if(waluta[0].name == "skup") {
@@ -51,8 +56,9 @@ function zapiszDaneFormularza() {
         document.cookie = waluta[0].className + "=" + skup + ":" + sprzedaz + "; path=/; expires=Fri, 31 Dec " + rokDoCiastka + " 23:59:59 GMT";
     })
     
-    document.cookie = "czasOstAkt=" + czasExportu + "; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT";
-    console.log("Utworzono ciasteczko: " + "czasOstAkt=" + czasExportu + "; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT");
+    //dodanie ciasteczka z timestampem
+    document.cookie = "czasOstAkt=" + czasExportu + "; path=/; expires=Fri, 31 Dec " + rokDoCiastka + " 23:59:59 GMT";
+    console.log("Utworzono ciasteczko: " + "czasOstAkt=" + czasExportu + "; path=/; expires=Fri, 31 Dec " + rokDoCiastka + " 23:59:59 GMT");
     
     var poleZczasemAkt = document.getElementById("czasAktualizacji");
     poleZczasemAkt.textContent = "Ostatnia aktualizacja: " + czasExportu;
@@ -60,7 +66,7 @@ function zapiszDaneFormularza() {
     alert("Kursy zostały załadowane (" + czasExportu + ")");
 }
 
-
+//generowanie pól input w oparciu o tablicę walut
 window.onload = function() {
     kodyDostepnychWalut.forEach(kod => {
         
