@@ -5,6 +5,9 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 @Data
 @Entity
@@ -14,18 +17,21 @@ public class Waluta {
     private String kod;
     private double skup;
     private double sprzedaz;
+    private Timestamp czas;
 
-    public Waluta(String kod, double skup, double sprzedaz) {
+    public Waluta(String kod, double skup, double sprzedaz, Timestamp czas) {
         this.kod = kod;
         this.skup = skup;
         this.sprzedaz = sprzedaz;
+        this.czas = czas;
     }
 
-    public Waluta(Long id, String kod, double skup, double sprzedaz) {
+    public Waluta(Long id, String kod, double skup, double sprzedaz, Timestamp czas) {
         this.id = id;
         this.kod = kod;
         this.skup = skup;
         this.sprzedaz = sprzedaz;
+        this.czas = czas;
     }
 
     public Waluta() {
@@ -33,6 +39,7 @@ public class Waluta {
 
 //    @Override
 //    public String toString() {
-//        return kod + ';' + skup + ';' + sprzedaz + ';';
+//        char a = '"';
+//        return a + kod + a + skup + ';' + sprzedaz + ';';
 //    }
 }

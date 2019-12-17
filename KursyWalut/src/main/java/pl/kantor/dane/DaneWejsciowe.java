@@ -1,6 +1,7 @@
 package pl.kantor.dane;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.google.gson.Gson;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -9,6 +10,7 @@ import pl.kantor.KursyWalut.Waluta;
 import pl.kantor.KursyWalut.WalutyRepository;
 
 import java.io.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,6 +27,7 @@ public class DaneWejsciowe {
     public static List<Waluta> stworzWalutyZPliku() {
 
         File f;
+        List<Waluta> waluty = new ArrayList<>();
 
         if(JSON_FILE.exists() && TXT_FILE.exists()) {
             f = JSON_FILE.lastModified() > TXT_FILE.lastModified() ? JSON_FILE : TXT_FILE;
@@ -36,23 +39,26 @@ public class DaneWejsciowe {
 
         System.out.println("Nazwa pliku: " + f.getName());
 
-        List<Waluta> waluty = new ArrayList<>();
-
         long id = 0;
         String kod = null;
         double skup = 0;
         double sprzedaz = 0;
+        Timestamp czas;
 
         try {
             if(f.getName().toUpperCase().equals("TABLICA.TXT")) {
                 System.out.println("czytane dla TABLICA.TXT");
                 Scanner scanner = new Scanner(f);
                 while (scanner.hasNext()) {
+
                     String liniaZPliku = scanner.nextLine();
+
                     kod = liniaZPliku.split(";")[0];
                     skup = Double.parseDouble(liniaZPliku.split(";")[1]);
                     sprzedaz = Double.parseDouble(liniaZPliku.split(";")[2]);
-                    waluty.add(new Waluta(kod, skup, sprzedaz));
+                    czas = new Timestamp(f.lastModified());
+
+                    waluty.add(new Waluta(kod, skup, sprzedaz,czas));
                 }
             } else {
                 System.out.println("czytane dla TABLICA.JSON");
@@ -61,11 +67,14 @@ public class DaneWejsciowe {
                 Object obj = jsonParser.parse(reader);
                 JSONArray listaWalut = (JSONArray) obj;
                 for(Object o : listaWalut) {
+
                     id = Long.parseLong(((JSONObject) o).get("id").toString());
                     kod = (String)((JSONObject) o).get("kod");
                     skup = Double.parseDouble(((JSONObject) o).get("skup").toString());
                     sprzedaz = Double.parseDouble(((JSONObject) o).get("sprzedaz").toString());
-                    waluty.add(new Waluta(id, kod, skup, sprzedaz));
+                    czas = new Timestamp(f.lastModified());
+
+                    waluty.add(new Waluta(id, kod, skup, sprzedaz,czas));
                 }
             }
             return waluty;
@@ -88,7 +97,7 @@ public class DaneWejsciowe {
         try {
             f.createNewFile();
             FileWriter fw = new FileWriter(getSciezkaDoPlikuWalutJSON);
-            fw.write(repo.findAll().toString());
+            fw.write(new Gson().toJson(repo.findAll()));
             fw.close();
             return "Załadowano waluty do pliku JSON: " + repo.findAll().toString();
         } catch (IOException e) {
@@ -96,6 +105,5 @@ public class DaneWejsciowe {
         }
         return null;
     }
-
 
 }

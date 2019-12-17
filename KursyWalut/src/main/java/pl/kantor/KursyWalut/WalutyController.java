@@ -20,6 +20,7 @@ public class WalutyController {
     }
 
     // zwraca listę walut z bazy
+    @CrossOrigin
     @GetMapping("/waluta")
     List<Waluta> wszystkie() {
         return repository.findAll();
